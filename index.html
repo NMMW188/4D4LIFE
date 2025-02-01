@@ -32,6 +32,7 @@
             text-decoration: none;
             border-radius: 5px;
             margin-top: 20px;
+            cursor: pointer;
         }
         .cta-button:hover {
             background: #218838;
@@ -52,12 +53,16 @@
         <img src="Masa senang.jpg" alt="Keadaan Berjaya" class="story-image">
         <p>Selepas mencuba, dia akhirnya berjaya memenangi hadiah yang mengubah hidupnya!</p>
         <p><strong>Kini peluang anda telah tiba!</strong> Dapatkan nombor ramalan dengan kebarangkalian tinggi untuk menang.</p>
-        <a href="https://dev.toyyibpay.com//AI-LP" class="cta-button" target="_blank">Dapatkan Sekarang Dengan Harga Promosi RM10!</a>
+        <a href="https://dev.toyyibpay.com/AI-LP?redirect=https://nmmw188.github.io/4D4LIFE/?success=true" class="cta-button">Dapatkan Sekarang Dengan Harga Promosi RM10!</a>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             if (window.location.search.includes("success=true")) {
+                setTimeout(() => {
+                    window.location.href = "#token-entry";
+                }, 500);
+                
                 document.getElementById("main-content").innerHTML = `
                     <h1>Terima Kasih atas Pembelian Anda!</h1>
                     <p>Sila masukkan 4 digit terakhir nombor IC anda untuk mendapatkan token:</p>
