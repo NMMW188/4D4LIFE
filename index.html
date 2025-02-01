@@ -61,9 +61,14 @@
             if (window.location.search.includes("success=true")) {
                 document.getElementById("main-content").innerHTML = `
                     <h1>Terima Kasih atas Pembelian Anda!</h1>
-                    <p>Pembayaran anda berjaya. Klik butang di bawah untuk meneruskan.</p>
+                    <p>Pembayaran anda berjaya. Anda akan dialihkan secara automatik...</p>
                     <a href="#token-section" class="cta-button" onclick="showTokenEntry()">Pergi ke Langkah Seterusnya</a>
                 `;
+                
+                // Auto redirect after 3 seconds
+                setTimeout(() => {
+                    showTokenEntry();
+                }, 3000);
             }
         });
 
