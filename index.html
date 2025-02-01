@@ -59,37 +59,40 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             if (window.location.search.includes("success=true")) {
-                setTimeout(() => {
-                    window.location.href = "#token-entry";
-                }, 500);
-                
                 document.getElementById("main-content").innerHTML = `
                     <h1>Terima Kasih atas Pembelian Anda!</h1>
-                    <p>Sila masukkan 4 digit terakhir nombor IC anda untuk mendapatkan token:</p>
-                    <form id="tokenForm">
-                        <input type="number" id="icNumber" placeholder="Masukkan 4 digit terakhir IC" maxlength="4" required>
-                        <br>
-                        <button type="submit" class="cta-button">Dapatkan Token</button>
-                    </form>
-                    <p id="tokenOutput"></p>
+                    <p>Pembayaran anda berjaya. Klik butang di bawah untuk meneruskan.</p>
+                    <a href="#token-section" class="cta-button" onclick="showTokenEntry()">Pergi ke Langkah Seterusnya</a>
                 `;
-
-                document.getElementById("tokenForm").addEventListener("submit", function(event) {
-                    event.preventDefault();
-                    let icNumber = document.getElementById("icNumber").value;
-                    
-                    if (icNumber.length === 4 && !isNaN(icNumber)) {
-                        let token = "RN-" + icNumber + "-" + Math.floor(1000 + Math.random() * 9000);
-                        document.getElementById("tokenOutput").innerHTML = 
-                            "<strong>Token anda:</strong> " + token + "<br><br>" + 
-                            "<a href='#' onclick='startLottery()' class='cta-button'>Pergi ke Langkah Seterusnya</a>";
-                    } else {
-                        document.getElementById("tokenOutput").innerHTML = 
-                            "<strong>Sila masukkan tepat 4 digit nombor IC.</strong>";
-                    }
-                });
             }
         });
+
+        function showTokenEntry() {
+            document.getElementById("main-content").innerHTML = `
+                <h1>Masukkan 4 Digit Terakhir IC Anda</h1>
+                <form id="tokenForm">
+                    <input type="number" id="icNumber" placeholder="Masukkan 4 digit terakhir IC" maxlength="4" required>
+                    <br>
+                    <button type="submit" class="cta-button">Dapatkan Token</button>
+                </form>
+                <p id="tokenOutput"></p>
+            `;
+
+            document.getElementById("tokenForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                let icNumber = document.getElementById("icNumber").value;
+                
+                if (icNumber.length === 4 && !isNaN(icNumber)) {
+                    let token = "RN-" + icNumber + "-" + Math.floor(1000 + Math.random() * 9000);
+                    document.getElementById("tokenOutput").innerHTML = 
+                        "<strong>Token anda:</strong> " + token + "<br><br>" + 
+                        "<a href='#' onclick='startLottery()' class='cta-button'>Pergi ke Simulasi</a>";
+                } else {
+                    document.getElementById("tokenOutput").innerHTML = 
+                        "<strong>Sila masukkan tepat 4 digit nombor IC.</strong>";
+                }
+            });
+        }
 
         function startLottery() {
             document.getElementById("main-content").innerHTML = `
