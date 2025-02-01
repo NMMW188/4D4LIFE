@@ -53,46 +53,11 @@
         <img src="Masa senang.jpg" alt="Keadaan Berjaya" class="story-image">
         <p>Selepas mencuba, dia akhirnya berjaya memenangi hadiah yang mengubah hidupnya!</p>
         <p><strong>Kini peluang anda telah tiba!</strong> Dapatkan nombor ramalan dengan kebarangkalian tinggi untuk menang.</p>
-        <a href="https://dev.toyyibpay.com/AI-LP" class="cta-button">Dapatkan Sekarang Dengan Harga Promosi RM10!</a>
+        <a href="?tokenentry=true" class="cta-button">Pergi ke Langkah Seterusnya</a>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has("billcode")) {
-                const billCode = urlParams.get("billcode");
-                
-                fetch("https://dev.toyyibpay.com/index.php/api/getBillTransactions", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        billCode: billCode,
-                        secretKey: "wsmf3k9p-t9ou-h2h9-dl5i-o6b88p52ksca"
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.length > 0 && data[0].transaction_status === "1") {
-                        window.location.href = "?success=true";
-                    } else {
-                        document.getElementById("main-content").innerHTML = `
-                            <h1>Pembayaran Gagal</h1>
-                            <p>Maaf, pembayaran anda belum berjaya. Sila cuba semula.</p>
-                            <a href="https://dev.toyyibpay.com/AI-LP" class="cta-button">Cuba Lagi</a>
-                        `;
-                    }
-                })
-                .catch(error => console.error("Error verifying payment:", error));
-            }
-
-            if (window.location.search.includes("success=true")) {
-                document.getElementById("main-content").innerHTML = `
-                    <h1>Terima Kasih atas Pembelian Anda!</h1>
-                    <p>Pembayaran anda berjaya! Klik butang di bawah untuk meneruskan.</p>
-                    <a href="?tokenentry=true" class="cta-button">Pergi ke Langkah Seterusnya</a>
-                `;
-            }
-
             if (window.location.search.includes("tokenentry=true")) {
                 showTokenEntry();
             }
@@ -123,6 +88,25 @@
                         "<strong>Sila masukkan tepat 4 digit nombor IC.</strong>";
                 }
             });
+        }
+
+        function startLottery() {
+            document.getElementById("main-content").innerHTML = `
+                <h1>Coklat Magnum 4D</h1>
+                <button onclick="generateLotteryResult()" class="cta-button">Lucky Number</button>
+                <div class="slot-container">
+                    <div class="slot" id="slot1">0</div>
+                    <div class="slot" id="slot2">0</div>
+                    <div class="slot" id="slot3">0</div>
+                    <div class="slot" id="slot4">0</div>
+                </div>
+                <div class="result" id="result"></div>
+            `;
+        }
+
+        function generateLotteryResult() {
+            let result = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById("result").innerText = "Lucky Number: " + result;
         }
     </script>
 </body>
