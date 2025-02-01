@@ -53,7 +53,7 @@
         <img src="Masa senang.jpg" alt="Keadaan Berjaya" class="story-image">
         <p>Selepas mencuba, dia akhirnya berjaya memenangi hadiah yang mengubah hidupnya!</p>
         <p><strong>Kini peluang anda telah tiba!</strong> Dapatkan nombor ramalan dengan kebarangkalian tinggi untuk menang.</p>
-        <a href="https://dev.toyyibpay.com/AI-LP?redirect=https://nmmw188.github.io/4D4LIFE/?success=true" class="cta-button">Dapatkan Sekarang Dengan Harga Promosi RM10!</a>
+        <a href="https://dev.toyyibpay.com/AI-LP" class="cta-button">Dapatkan Sekarang Dengan Harga Promosi RM10!</a>
     </div>
 
     <script>
@@ -61,13 +61,9 @@
             if (window.location.search.includes("success=true")) {
                 document.getElementById("main-content").innerHTML = `
                     <h1>Terima Kasih atas Pembelian Anda!</h1>
-                    <p>Pembayaran anda berjaya. Anda akan dialihkan secara automatik...</p>
+                    <p>Pembayaran anda berjaya! Klik butang di bawah untuk meneruskan.</p>
+                    <a href="?tokenentry=true" class="cta-button">Pergi ke Langkah Seterusnya</a>
                 `;
-                
-                // Force redirect to token entry after 5 seconds
-                setTimeout(() => {
-                    window.location.href = "https://nmmw188.github.io/4D4LIFE/?tokenentry=true";
-                }, 5000);
             }
 
             if (window.location.search.includes("tokenentry=true")) {
