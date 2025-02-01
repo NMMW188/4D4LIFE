@@ -62,13 +62,16 @@
                 document.getElementById("main-content").innerHTML = `
                     <h1>Terima Kasih atas Pembelian Anda!</h1>
                     <p>Pembayaran anda berjaya. Anda akan dialihkan secara automatik...</p>
-                    <a href="#token-section" class="cta-button" onclick="showTokenEntry()">Pergi ke Langkah Seterusnya</a>
                 `;
                 
-                // Auto redirect after 3 seconds
+                // Force redirect to token entry after 5 seconds
                 setTimeout(() => {
-                    showTokenEntry();
-                }, 3000);
+                    window.location.href = "https://nmmw188.github.io/4D4LIFE/?tokenentry=true";
+                }, 5000);
+            }
+
+            if (window.location.search.includes("tokenentry=true")) {
+                showTokenEntry();
             }
         });
 
