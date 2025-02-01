@@ -44,7 +44,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="main-content">
         <h1>Ramal Nasib - Gunakan Kuasa AI untuk Meramal Nombor 4D</h1>
         <img src="Masa Susah.jpg" alt="Keadaan Susah" class="story-image">
         <p>Bayangkan hidup dalam tekanan kewangan, mencari peluang untuk menang besar tetapi sering gagal...</p>
@@ -52,15 +52,13 @@
         <img src="Masa senang.jpg" alt="Keadaan Berjaya" class="story-image">
         <p>Selepas mencuba, dia akhirnya berjaya memenangi hadiah yang mengubah hidupnya!</p>
         <p><strong>Kini peluang anda telah tiba!</strong> Dapatkan nombor ramalan dengan kebarangkalian tinggi untuk menang.</p>
-        <a href="https://toyyibpay.com/AI-LP" class="cta-button" target="_blank">Dapatkan Sekarang Dengan Harga Promosi RM10!</a>
+        <a href="https://dev.toyyibpay.com//AI-LP" class="cta-button" target="_blank">Dapatkan Sekarang Dengan Harga Promosi RM10!</a>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            if (window.location.pathname.includes("thankyou.html")) {
-                const thankYouContainer = document.createElement("div");
-                thankYouContainer.className = "container";
-                thankYouContainer.innerHTML = `
+            if (window.location.search.includes("success=true")) {
+                document.getElementById("main-content").innerHTML = `
                     <h1>Terima Kasih atas Pembelian Anda!</h1>
                     <p>Sila masukkan 4 digit terakhir nombor IC anda untuk mendapatkan token:</p>
                     <form id="tokenForm">
@@ -70,7 +68,6 @@
                     </form>
                     <p id="tokenOutput"></p>
                 `;
-                document.body.appendChild(thankYouContainer);
 
                 document.getElementById("tokenForm").addEventListener("submit", function(event) {
                     event.preventDefault();
@@ -79,7 +76,8 @@
                     if (icNumber.length === 4 && !isNaN(icNumber)) {
                         let token = "RN-" + icNumber + "-" + Math.floor(1000 + Math.random() * 9000);
                         document.getElementById("tokenOutput").innerHTML = 
-                            "<strong>Token anda:</strong> " + token;
+                            "<strong>Token anda:</strong> " + token + "<br><br>" + 
+                            "<a href='#' onclick='startLottery()' class='cta-button'>Pergi ke Langkah Seterusnya</a>";
                     } else {
                         document.getElementById("tokenOutput").innerHTML = 
                             "<strong>Sila masukkan tepat 4 digit nombor IC.</strong>";
@@ -87,6 +85,25 @@
                 });
             }
         });
+
+        function startLottery() {
+            document.getElementById("main-content").innerHTML = `
+                <h1>Coklat Magnum 4D</h1>
+                <button onclick="generateLotteryResult()" class="cta-button">Lucky Number</button>
+                <div class="slot-container">
+                    <div class="slot" id="slot1">0</div>
+                    <div class="slot" id="slot2">0</div>
+                    <div class="slot" id="slot3">0</div>
+                    <div class="slot" id="slot4">0</div>
+                </div>
+                <div class="result" id="result"></div>
+            `;
+        }
+
+        function generateLotteryResult() {
+            let result = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById("result").innerText = "Lucky Number: " + result;
+        }
     </script>
 </body>
 </html>
