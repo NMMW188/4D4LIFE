@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ms">
 <head>
@@ -6,60 +7,96 @@
     <title>Ramal Nasib - AI Meramal Nombor 4D</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Georgia', serif;
             text-align: center;
-            background-color: #f4f4f4;
+            background-color: #000;
+            background-image: linear-gradient(to bottom, #333, #111);
+            color: #FFD700;
             margin: 0;
             padding: 0;
         }
         .container {
-            max-width: 600px;
+            max-width: 700px;
             margin: 50px auto;
-            background: white;
+            background: rgba(0, 0, 0, 0.9);
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+            border: 2px solid #FFD700;
         }
         h1 {
-            color: #d9534f;
+            color: #FFD700;
+            font-size: 2.5em;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #fff;
         }
         .cta-button {
             display: inline-block;
             padding: 15px 30px;
             font-size: 18px;
-            background: #28a745;
-            color: white;
+            font-weight: bold;
+            background: linear-gradient(to bottom, #FFD700, #FFA500);
+            color: #000;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 10px;
             margin-top: 20px;
             cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
         }
         .cta-button:hover {
-            background: #218838;
+            background: linear-gradient(to bottom, #FFA500, #FFD700);
         }
         .story-image {
             width: 100%;
             border-radius: 10px;
             margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
         }
         .slot-container {
             display: flex;
             justify-content: center;
             font-size: 2em;
             margin-top: 20px;
+            gap: 15px;
         }
         .slot {
-            background: white;
-            border: 2px solid #d9534f;
-            padding: 10px;
-            margin: 5px;
-            width: 50px;
+            background: #333;
+            border: 2px solid #FFD700;
+            color: #FFD700;
+            padding: 20px;
+            width: 70px;
+            height: 100px;
             text-align: center;
             font-weight: bold;
+            font-size: 1.5em;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
         }
         .result {
-            font-size: 1.5em;
-            margin-top: 20px;
+            font-size: 1.8em;
+            margin-top: 30px;
+            background: #FFD700;
+            color: #000;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
+        }
+        .disclaimer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #FFD700;
+            text-align: center;
+            line-height: 1.5;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
 </head>
@@ -72,23 +109,26 @@
         <img src="Masa senang.jpg" alt="Keadaan Berjaya" class="story-image">
         <p>Selepas mencuba, dia akhirnya berjaya memenangi hadiah yang mengubah hidupnya!</p>
         <p><strong>Kini peluang anda telah tiba!</strong> Dapatkan nombor ramalan dengan kebarangkalian tinggi untuk menang.</p>
-        <a href="?tokenentry=true" class="cta-button">Pergi ke Langkah Seterusnya</a>
+        <button onclick="showTokenEntry()" class="cta-button">Pergi ke Langkah Seterusnya</button>
+    </div>
+
+    <div class="disclaimer">
+        <p><strong>Risk Acknowledgement:</strong><br>
+        By using this software, you acknowledge and agree that you are solely responsible for all risks associated with gambling and any financial losses incurred. You assume all risks and accept all consequences arising from your use of this software. This software does not guarantee any winnings; while its methods may optimize predictions by identifying patterns, sequences, and probabilities, no prediction method can assure a win. By proceeding, you agree not to hold the software provider liable for any losses or damage. Please gamble responsibly and only wager what you can afford to lose.</p>
+
+        <p><strong>Pengakuan Risiko:</strong><br>
+         Dengan menggunakan perisian ini, anda mengakui dan bersetuju bahawa segala risiko berkaitan dengan perjudian serta sebarang kerugian kewangan yang mungkin timbul adalah tanggungjawab anda sepenuhnya. Anda menerima bahawa anda bertanggungjawab ke atas segala akibat yang timbul daripada penggunaan perisian ini. Perisian ini tidak menjamin sebarang kemenangan. Walaupun kaedah yang disediakan dapat mengoptimumkan ramalan dengan mengenal pasti corak, jujukan, dan kebarangkalian, tiada kaedah ramalan yang dapat memastikan kemenangan. Dengan meneruskan, anda bersetuju untuk tidak menuntut penyedia perisian atas sebarang kerugian atau kerosakan. Sila berjudi dengan bertanggungjawab dan hanya mempertaruhkan apa yang anda mampu untuk kehilangan.</p>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            if (window.location.search.includes("tokenentry=true")) {
-                showTokenEntry();
-            }
-        });
+        let clickCount = 0;
 
         function showTokenEntry() {
             document.getElementById("main-content").innerHTML = `
-                <div class='container'>
-                    <h3>Masukkan Token ID Anda:</h3>
-                    <input type="text" id="tokenInput" placeholder="Masukkan Token ID">
-                    <button onclick="validateToken()" class="cta-button">Hantar Token</button>
-                </div>
+                <h1>Masukkan Token ID Anda</h1>
+                <p>Sila masukkan Token ID anda untuk meneruskan.</p>
+                <input type="text" id="tokenInput" placeholder="Masukkan Token ID">
+                <button onclick="validateToken()" class="cta-button">Hantar Token</button>
             `;
         }
 
@@ -98,7 +138,7 @@
                 'MAGNUM128', 'MAGNUM129', 'MAGNUM130', 'MAGNUM131', 'MAGNUM132'
             ];
             const enteredToken = document.getElementById('tokenInput').value;
-            
+
             if (predefinedTokens.includes(enteredToken)) {
                 startLottery();
             } else {
@@ -121,12 +161,32 @@
         }
 
         function generateLotteryResult() {
-            let result = Math.floor(1000 + Math.random() * 9000).toString();
-            document.getElementById("slot1").innerText = result.charAt(0);
-            document.getElementById("slot2").innerText = result.charAt(1);
-            document.getElementById("slot3").innerText = result.charAt(2);
-            document.getElementById("slot4").innerText = result.charAt(3);
-            document.getElementById("result").innerText = "Nombor Bertuah Anda: " + result;
+            const magnumResults = ["7766", "5304", "0773", "7866", "6229", "2037", "0196", "2214", "9422"];
+
+            const slots = [document.getElementById('slot1'), document.getElementById('slot2'), document.getElementById('slot3'), document.getElementById('slot4')];
+            let spinCount = 0;
+            let selectedNumber;
+
+            let spinInterval = setInterval(() => {
+                spinCount++;
+                slots.forEach(slot => slot.innerText = Math.floor(Math.random() * 10));
+
+                if (spinCount >= 20) {
+                    clearInterval(spinInterval);
+                    const randomIndex = Math.floor(Math.random() * magnumResults.length);
+                    selectedNumber = magnumResults[randomIndex];
+                    document.getElementById("result").innerText = "Nombor Bertuah Anda: " + selectedNumber;
+                    updateSlots(selectedNumber);
+                }
+            }, 100);
+        }
+
+        function updateSlots(number) {
+            const digits = number.split('');
+            document.getElementById('slot1').innerText = digits[0];
+            document.getElementById('slot2').innerText = digits[1];
+            document.getElementById('slot3').innerText = digits[2];
+            document.getElementById('slot4').innerText = digits[3];
         }
     </script>
 </body>
