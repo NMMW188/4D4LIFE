@@ -42,6 +42,25 @@
             border-radius: 10px;
             margin-top: 20px;
         }
+        .slot-container {
+            display: flex;
+            justify-content: center;
+            font-size: 2em;
+            margin-top: 20px;
+        }
+        .slot {
+            background: white;
+            border: 2px solid #d9534f;
+            padding: 10px;
+            margin: 5px;
+            width: 50px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .result {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -65,35 +84,32 @@
 
         function showTokenEntry() {
             document.getElementById("main-content").innerHTML = `
-                <h1>Masukkan 4 Digit Terakhir IC Anda</h1>
-                <form id="tokenForm">
-                    <input type="number" id="icNumber" placeholder="Masukkan 4 digit terakhir IC" maxlength="4" required>
-                    <br>
-                    <button type="submit" class="cta-button">Dapatkan Token</button>
-                </form>
-                <p id="tokenOutput"></p>
+                <div class='container'>
+                    <h3>Masukkan Token ID Anda:</h3>
+                    <input type="text" id="tokenInput" placeholder="Masukkan Token ID">
+                    <button onclick="validateToken()" class="cta-button">Hantar Token</button>
+                </div>
             `;
+        }
 
-            document.getElementById("tokenForm").addEventListener("submit", function(event) {
-                event.preventDefault();
-                let icNumber = document.getElementById("icNumber").value;
-                
-                if (icNumber.length === 4 && !isNaN(icNumber)) {
-                    let token = "RN-" + icNumber + "-" + Math.floor(1000 + Math.random() * 9000);
-                    document.getElementById("tokenOutput").innerHTML = 
-                        "<strong>Token anda:</strong> " + token + "<br><br>" + 
-                        "<a href='#' onclick='startLottery()' class='cta-button'>Pergi ke Simulasi</a>";
-                } else {
-                    document.getElementById("tokenOutput").innerHTML = 
-                        "<strong>Sila masukkan tepat 4 digit nombor IC.</strong>";
-                }
-            });
+        function validateToken() {
+            const predefinedTokens = [
+                'MAGNUM123', 'MAGNUM124', 'MAGNUM125', 'MAGNUM126', 'MAGNUM127',
+                'MAGNUM128', 'MAGNUM129', 'MAGNUM130', 'MAGNUM131', 'MAGNUM132'
+            ];
+            const enteredToken = document.getElementById('tokenInput').value;
+            
+            if (predefinedTokens.includes(enteredToken)) {
+                startLottery();
+            } else {
+                alert("Token ID tidak sah! Sila cuba lagi.");
+            }
         }
 
         function startLottery() {
             document.getElementById("main-content").innerHTML = `
-                <h1>Coklat Magnum 4D</h1>
-                <button onclick="generateLotteryResult()" class="cta-button">Lucky Number</button>
+                <h1>Simulasi Nombor Bertuah 4D</h1>
+                <button onclick="generateLotteryResult()" class="cta-button">Dapatkan Nombor Bertuah</button>
                 <div class="slot-container">
                     <div class="slot" id="slot1">0</div>
                     <div class="slot" id="slot2">0</div>
@@ -105,8 +121,12 @@
         }
 
         function generateLotteryResult() {
-            let result = Math.floor(1000 + Math.random() * 9000);
-            document.getElementById("result").innerText = "Lucky Number: " + result;
+            let result = Math.floor(1000 + Math.random() * 9000).toString();
+            document.getElementById("slot1").innerText = result.charAt(0);
+            document.getElementById("slot2").innerText = result.charAt(1);
+            document.getElementById("slot3").innerText = result.charAt(2);
+            document.getElementById("slot4").innerText = result.charAt(3);
+            document.getElementById("result").innerText = "Nombor Bertuah Anda: " + result;
         }
     </script>
 </body>
