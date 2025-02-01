@@ -52,7 +52,41 @@
         <img src="Masa senang.jpg" alt="Keadaan Berjaya" class="story-image">
         <p>Selepas mencuba, dia akhirnya berjaya memenangi hadiah yang mengubah hidupnya!</p>
         <p><strong>Kini peluang anda telah tiba!</strong> Dapatkan nombor ramalan dengan kebarangkalian tinggi untuk menang.</p>
-        <a href="#" class="cta-button">Dapatkan Sekarang Dengan Harga Promosi RM10!</a>
+        <a href="https://toyyibpay.com/RamalNasib-Payment12345" class="cta-button" target="_blank">Dapatkan Sekarang Dengan Harga Promosi RM10!</a>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (window.location.pathname.includes("thankyou.html")) {
+                const thankYouContainer = document.createElement("div");
+                thankYouContainer.className = "container";
+                thankYouContainer.innerHTML = `
+                    <h1>Terima Kasih atas Pembelian Anda!</h1>
+                    <p>Sila masukkan 4 digit terakhir nombor IC anda untuk mendapatkan token:</p>
+                    <form id="tokenForm">
+                        <input type="number" id="icNumber" placeholder="Masukkan 4 digit terakhir IC" maxlength="4" required>
+                        <br>
+                        <button type="submit" class="cta-button">Dapatkan Token</button>
+                    </form>
+                    <p id="tokenOutput"></p>
+                `;
+                document.body.appendChild(thankYouContainer);
+
+                document.getElementById("tokenForm").addEventListener("submit", function(event) {
+                    event.preventDefault();
+                    let icNumber = document.getElementById("icNumber").value;
+                    
+                    if (icNumber.length === 4 && !isNaN(icNumber)) {
+                        let token = "RN-" + icNumber + "-" + Math.floor(1000 + Math.random() * 9000);
+                        document.getElementById("tokenOutput").innerHTML = 
+                            "<strong>Token anda:</strong> " + token;
+                    } else {
+                        document.getElementById("tokenOutput").innerHTML = 
+                            "<strong>Sila masukkan tepat 4 digit nombor IC.</strong>";
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
