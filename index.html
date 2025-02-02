@@ -120,74 +120,59 @@
          Dengan menggunakan perisian ini, anda mengakui dan bersetuju bahawa segala risiko berkaitan dengan perjudian serta sebarang kerugian kewangan yang mungkin timbul adalah tanggungjawab anda sepenuhnya. Anda menerima bahawa anda bertanggungjawab ke atas segala akibat yang timbul daripada penggunaan perisian ini. Perisian ini tidak menjamin sebarang kemenangan. Walaupun kaedah yang disediakan dapat mengoptimumkan ramalan dengan mengenal pasti corak, jujukan, dan kebarangkalian, tiada kaedah ramalan yang dapat memastikan kemenangan. Dengan meneruskan, anda bersetuju untuk tidak menuntut penyedia perisian atas sebarang kerugian atau kerosakan. Sila berjudi dengan bertanggungjawab dan hanya mempertaruhkan apa yang anda mampu untuk kehilangan.</p>
     </div>
 
-    <script>
-        let clickCount = 0;
+<script>
+    let clickCount = 0;
 
-        function showTokenEntry() {
-            document.getElementById("main-content").innerHTML = `
-                <h1>Masukkan Token ID Anda</h1>
-                <p>Sila masukkan Token ID anda untuk meneruskan.</p>
-                <input type="text" id="tokenInput" placeholder="Masukkan Token ID">
-                <button onclick="validateToken()" class="cta-button">Hantar Token</button>
-            `;
-        }
+    function generateLotteryResult() {
+        const magnumResults = ["7766", "5304", "0773", "7866", "6229", "2037", "0196", "2214", "9422", "8458", "7093", "6701", "8444", "5825", "1909", "7486", "6063", "5495", "7095", "4480", "6664", "9366", "6322", "0824"];
 
-        function validateToken() {
-            const predefinedTokens = [
-                'MAGNUM123', 'MAGNUM124', 'MAGNUM125', 'MAGNUM126', 'MAGNUM127',
-                'MAGNUM128', 'MAGNUM129', 'MAGNUM130', 'MAGNUM131', 'MAGNUM132'
-            ];
-            const enteredToken = document.getElementById('tokenInput').value;
+        const slots = [
+            document.getElementById('slot1'),
+            document.getElementById('slot2'),
+            document.getElementById('slot3'),
+            document.getElementById('slot4')
+        ];
 
-            if (predefinedTokens.includes(enteredToken)) {
-                startLottery();
-            } else {
-                alert("Token ID tidak sah! Sila cuba lagi.");
-            }
-        }
+        let spinCount = 0;
+        let selectedNumber;
 
-        function startLottery() {
-            document.getElementById("main-content").innerHTML = `
-                <h1>Nombor Coklat Magnum Bertuah 4D</h1>
-                <button onclick="generateLotteryResult()" class="cta-button">Dapatkan Nombor Bertuah</button>
-                <div class="slot-container">
-                    <div class="slot" id="slot1">0</div>
-                    <div class="slot" id="slot2">0</div>
-                    <div class="slot" id="slot3">0</div>
-                    <div class="slot" id="slot4">0</div>
-                </div>
-                <div class="result" id="result"></div>
-            `;
-        }
+        clickCount++;
 
-        function generateLotteryResult() {
-            const magnumResults = ["7766", "5304", "0773", "7866", "6229", "2037", "0196", "2214", "9422", "8458", "7093", "6701", "8444", "5825", "1909", "7486", "6063", "5495", "7095", "4480", "6664", "9366", "6322", "0824"];
+        let spinInterval = setInterval(() => {
+            spinCount++;
+            slots.forEach(slot => slot.innerText = Math.floor(Math.random() * 10));
 
-            const slots = [document.getElementById('slot1'), document.getElementById('slot2'), document.getElementById('slot3'), document.getElementById('slot4')];
-            let spinCount = 0;
-            let selectedNumber;
+            if (spinCount >= 20) {
+                clearInterval(spinInterval);
 
-            let spinInterval = setInterval(() => {
-                spinCount++;
-                slots.forEach(slot => slot.innerText = Math.floor(Math.random() * 10));
-
-                if (spinCount >= 20) {
-                    clearInterval(spinInterval);
+                if (clickCount <= 3) {
+                    // Generate a completely random number (not from predefined list)
+                    do {
+                        selectedNumber = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+                    } while (magnumResults.includes(selectedNumber));
+                } else if (clickCount === 4 || clickCount === 5) {
+                    // Select from predefined winning numbers
                     const randomIndex = Math.floor(Math.random() * magnumResults.length);
                     selectedNumber = magnumResults[randomIndex];
-                    document.getElementById("result").innerText = "Nombor Bertuah Anda: " + selectedNumber;
-                    updateSlots(selectedNumber);
+                } else {
+                    // Reset click count after the 5th click
+                    clickCount = 0;
+                    return;
                 }
-            }, 100);
-        }
 
-        function updateSlots(number) {
-            const digits = number.split('');
-            document.getElementById('slot1').innerText = digits[0];
-            document.getElementById('slot2').innerText = digits[1];
-            document.getElementById('slot3').innerText = digits[2];
-            document.getElementById('slot4').innerText = digits[3];
-        }
-    </script>
+                document.getElementById("result").innerText = "Nombor Bertuah Anda: " + selectedNumber;
+                updateSlots(selectedNumber);
+            }
+        }, 100);
+    }
+
+    function updateSlots(number) {
+        const digits = number.split('');
+        document.getElementById('slot1').innerText = digits[0];
+        document.getElementById('slot2').innerText = digits[1];
+        document.getElementById('slot3').innerText = digits[2];
+        document.getElementById('slot4').innerText = digits[3];
+    }
+</script>
 </body>
 </html>
