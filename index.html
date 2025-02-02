@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ms">
 <head>
@@ -14,6 +13,10 @@
             color: #FFD700;
             margin: 0;
             padding: 0;
+            user-select: none;
+            -webkit-user-select: none; /* For Safari */
+            -moz-user-select: none; /* For Firefox */
+            -ms-user-select: none; /* For IE/Edge */
         }
         .container {
             max-width: 700px;
@@ -99,28 +102,31 @@
             margin-right: auto;
         }
     </style>
-</head>
-<body>
-    <div class="container" id="main-content">
-        <h1>Ramal Nasib - Gunakan Kuasa AI untuk Meramal Nombor 4D</h1>
-        <img src="Masa Susah.jpg" alt="Keadaan Susah" class="story-image">
-        <p>Bayangkan hidup dalam tekanan kewangan, mencari peluang untuk menang besar tetapi sering gagal...</p>
-        <p>Seorang lelaki biasa menemui <strong>Ramal Nasib</strong>, perisian berkuasa AI yang menggunakan algoritma khas untuk menganalisis corak nombor terdahulu dan meningkatkan peluang kemenangan.</p>
-        <img src="Masa senang.jpg" alt="Keadaan Berjaya" class="story-image">
-        <p>Selepas mencuba, dia akhirnya berjaya memenangi hadiah yang mengubah hidupnya!</p>
-        <p><strong>Kini peluang anda telah tiba!</strong> Dapatkan nombor ramalan dengan kebarangkalian tinggi untuk menang.</p>
-        <button onclick="showTokenEntry()" class="cta-button">Pergi ke Langkah Seterusnya</button>
-    </div>
-
-    <div class="disclaimer">
-        <p><strong>Risk Acknowledgement:</strong><br>
-        By using this software, you acknowledge and agree that you are solely responsible for all risks associated with gambling and any financial losses incurred. You assume all risks and accept all consequences arising from your use of this software. This software does not guarantee any winnings; while its methods may optimize predictions by identifying patterns, sequences, and probabilities, no prediction method can assure a win. By proceeding, you agree not to hold the software provider liable for any losses or damage. Please gamble responsibly and only wager what you can afford to lose.</p>
-
-        <p><strong>Pengakuan Risiko:</strong><br>
-         Dengan menggunakan perisian ini, anda mengakui dan bersetuju bahawa segala risiko berkaitan dengan perjudian serta sebarang kerugian kewangan yang mungkin timbul adalah tanggungjawab anda sepenuhnya. Anda menerima bahawa anda bertanggungjawab ke atas segala akibat yang timbul daripada penggunaan perisian ini. Perisian ini tidak menjamin sebarang kemenangan. Walaupun kaedah yang disediakan dapat mengoptimumkan ramalan dengan mengenal pasti corak, jujukan, dan kebarangkalian, tiada kaedah ramalan yang dapat memastikan kemenangan. Dengan meneruskan, anda bersetuju untuk tidak menuntut penyedia perisian atas sebarang kerugian atau kerosakan. Sila berjudi dengan bertanggungjawab dan hanya mempertaruhkan apa yang anda mampu untuk kehilangan.</p>
-    </div>
-
     <script>
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable common developer tools shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J', 'C', 'U'].includes(e.key))) {
+                e.preventDefault();
+            }
+        });
+
+        // Detect Developer Tools and redirect
+        (function detectDevTools() {
+            const element = new Image();
+            Object.defineProperty(element, 'id', {
+                get: function() {
+                    alert('Developer tools detected. Please close it.');
+                    window.location.href = 'about:blank'; // Redirect or handle as necessary
+                }
+            });
+            console.log(element);
+        })();
+
         let clickCount = 0;
 
         function showTokenEntry() {
@@ -211,5 +217,25 @@
         document.getElementById('slot4').innerText = digits[3];
         }
     </script>
+</head>
+<body>
+    <div class="container" id="main-content">
+        <h1>Ramal Nasib - Gunakan Kuasa AI untuk Meramal Nombor 4D</h1>
+        <img src="Masa Susah.jpg" alt="Keadaan Susah" class="story-image">
+        <p>Bayangkan hidup dalam tekanan kewangan, mencari peluang untuk menang besar tetapi sering gagal...</p>
+        <p>Seorang lelaki biasa menemui <strong>Ramal Nasib</strong>, perisian berkuasa AI yang menggunakan algoritma khas untuk menganalisis corak nombor terdahulu dan meningkatkan peluang kemenangan.</p>
+        <img src="Masa senang.jpg" alt="Keadaan Berjaya" class="story-image">
+        <p>Selepas mencuba, dia akhirnya berjaya memenangi hadiah yang mengubah hidupnya!</p>
+        <p><strong>Kini peluang anda telah tiba!</strong> Dapatkan nombor ramalan dengan kebarangkalian tinggi untuk menang.</p>
+        <button onclick="showTokenEntry()" class="cta-button">Pergi ke Langkah Seterusnya</button>
+    </div>
+
+    <div class="disclaimer">
+        <p><strong>Risk Acknowledgement:</strong><br>
+        By using this software, you acknowledge and agree that you are solely responsible for all risks associated with gambling and any financial losses incurred. You assume all risks and accept all consequences arising from your use of this software. This software does not guarantee any winnings; while its methods may optimize predictions by identifying patterns, sequences, and probabilities, no prediction method can assure a win. By proceeding, you agree not to hold the software provider liable for any losses or damage. Please gamble responsibly and only wager what you can afford to lose.</p>
+
+        <p><strong>Pengakuan Risiko:</strong><br>
+         Dengan menggunakan perisian ini, anda mengakui dan bersetuju bahawa segala risiko berkaitan dengan perjudian serta sebarang kerugian kewangan yang mungkin timbul adalah tanggungjawab anda sepenuhnya. Anda menerima bahawa anda bertanggungjawab ke atas segala akibat yang timbul daripada penggunaan perisian ini. Perisian ini tidak menjamin sebarang kemenangan. Walaupun kaedah yang disediakan dapat mengoptimumkan ramalan dengan mengenal pasti corak, jujukan, dan kebarangkalian, tiada kaedah ramalan yang dapat memastikan kemenangan. Dengan meneruskan, anda bersetuju untuk tidak menuntut penyedia perisian atas sebarang kerugian atau kerosakan. Sila berjudi dengan bertanggungjawab dan hanya mempertaruhkan apa yang anda mampu untuk kehilangan.</p>
+    </div>
 </body>
 </html>
